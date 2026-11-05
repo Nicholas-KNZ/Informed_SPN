@@ -75,6 +75,9 @@ Feature 8   0  0  1  0
 
 Alle Ansätze verhalten sich in etwa gleich, Optimal > Heuristik > Random.
 
+## Ergebnisse zu Experiment 1
+### Mit EM (`PYTHONPATH=. python experiments/exp2.py --run em`)
+<img width="653" height="568" alt="image" src="https://github.com/user-attachments/assets/331c6b1f-5737-436d-baa1-084780fb24dd" />
 
 
 
