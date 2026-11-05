@@ -1,4 +1,6 @@
 '''
+Cancer Datensatz 
+
 Vergleiche für 5 verschiedene Seeds die folgeneden Modellkonfigurationen: 
     
     - LearnSPN (nur einmalig pro Seed ) 
@@ -25,9 +27,17 @@ from src.ist import InformedSplitTensorizedSPN
 from src import ist
 import time
 import torch 
+import argparse
 
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run", choices=["em", "gd"], default="em",
+                        help="Training method: em or gd")
+    return parser.parse_args()
 
 def main(): 
+
+    args = parse_args()
 
     models = []
     dataset = get_cancer_data()[0]
@@ -65,12 +75,14 @@ def main():
         rat = RatSPN(leaf_modules=rat_leaves, n_root_nodes=1, n_region_nodes=8, num_repetitions=1, depth = 3)
         train_time = time.time() - start_time
 
-        # expectation_maximization(rat, dataset.train_tensor)
-        gradient_descent.train_gradient_descent(
-                        rat,
-                        dataset.train_dataloader,
-                        epochs=100,
-                    )
+        if args.run == "em":
+            expectation_maximization(rat, dataset.train_tensor)
+        else: 
+            gradient_descent.train_gradient_descent(
+                            rat,
+                            dataset.train_dataloader,
+                            epochs=100,
+                        )
         train_likelihood = torch.mean(rat.log_likelihood(dataset.train_tensor)).item()
         test_likelihood = torch.mean(rat.log_likelihood(dataset.test_tensor)).item()
 
@@ -100,8 +112,10 @@ def main():
                            dependency_test=test, 
                            ordering=ordering)
 
-            # expectation_maximization(tree_structure.root_node, dataset.train_tensor)
-            gradient_descent.train_gradient_descent(
+            if args.run == "em":
+                expectation_maximization(tree_structure.root_node, dataset.train_tensor)
+            else: 
+                gradient_descent.train_gradient_descent(
                 tree_structure.root_node,
                 dataset.train_dataloader,
                 epochs=100,
