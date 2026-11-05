@@ -1,0 +1,7 @@
+spflow
+torch
+numpy
+ucimlrepo
+pandas
+scikit-learn
+rtpt
