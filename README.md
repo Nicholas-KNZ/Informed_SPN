@@ -64,3 +64,19 @@ Feature 6   0  0  0  1
 Feature 7   0  0  0  1
 Feature 8   0  0  1  0
 ```
+
+## Ergebnisse zu Experiment 1
+
+### Mit Gradient Descent (`PYTHONPATH=. python experiments/exp1.py --run gd`)
+<img width="655" height="567" alt="Pasted Graphic" src="https://github.com/user-attachments/assets/230d1dd5-5ec3-44dc-9c32-756edf599d0c" />
+
+### Mit EM (`PYTHONPATH=. python experiments/exp1.py --run em`)
+<img width="639" height="569" alt="Pasted Graphic 1" src="https://github.com/user-attachments/assets/b6543808-d962-4c9d-aa28-76606cb088d9" />
+
+Alle Ansätze verhalten sich in etwa gleich, Optimal > Heuristik > Random.
+
+
+
+
+
+
